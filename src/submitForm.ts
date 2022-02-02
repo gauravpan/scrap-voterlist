@@ -1,3 +1,12 @@
+/*
+
+This method doesn't work.
+So, planned to go with puppeteer
+
+*/
+
+
+
 import axios from "axios";
 import FormData from "form-data";
 
