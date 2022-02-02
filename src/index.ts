@@ -1,11 +1,13 @@
-import { getDistricts, submitForm } from "./submitForm";
-import fs from 'fs'
+import { getDistricts } from "./getDistricts";
+import { getStates } from "./getStates"
 
-// submitForm()
-const provinces = ['1', '2', '3', '4', '5']
+const URL = `https://voterlist.election.gov.np/bbvrs/index_2.php`;
 
-provinces.forEach(async (province) => {
-    let res = await getDistricts(province)
-    console.log(res.data)
-    // fs.writeFileSync(`../raw/district_by_provinces/${province}`, res.data.result);
-})
+(async function scrapAll() {
+    let states = await getStates(URL);
+    states.forEach(async ({ id }) => {
+        let districts = await getDistricts(URL, id)
+    })
+
+
+})()

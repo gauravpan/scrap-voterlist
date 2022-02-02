@@ -1,4 +1,4 @@
 {
   "verbose": true,
-  "ignore": ["node_modules", "src/*"]
+  "ignore": ["node_modules", "src/*","data/*"]
 }
