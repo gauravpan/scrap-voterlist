@@ -7,5 +7,6 @@ export function objectToFile(obj: any, objName: string, fileName: string) {
 export const ${objName} = ${JSON.stringify(obj)}
 
     `;
+    console.log(` Saving ${fileName}...`)
     return fs.writeFile(`data/${fileName}`, data)
 }
