@@ -13,13 +13,14 @@ export async function getDistricts(url: string, province_id: string): Promise<Di
     await page.goto(url, { waitUntil: 'networkidle0' });
     await page.select('#state', province_id);
     await page.waitForNetworkIdle()
-    const districtList = await page.evaluate((province_id) => {
-        let stateForm = Array.from(document.querySelectorAll('#district option'));
-        return stateForm.map((ele) => {
-            return { name: ele.innerHTML, id: ele.getAttribute('value'), province_id };
+    const _districtList = await page.evaluate(() => {
+        let districtForm = Array.from(document.querySelectorAll('#district option'));
+        return districtForm.map((ele) => {
+            return { name: ele.innerHTML, id: ele.getAttribute('value'), };
         });
-    }, province_id)
-    districtList.shift()
+    })
+    _districtList.shift()
+    let districtList = _districtList.map((district) => ({ ...district, province_id }))
     await objectToFile(districtList, `districts_of_${province_id}`, `${province_id}_districts.js`)
     await browser.close();
     return districtList;
